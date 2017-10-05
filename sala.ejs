@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html lang="" class="corpo">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PickPlay - Room 1</title>
+
+  </head>
+  <body class="body">
+    <!--<h1 id="title" class="text-center"></h1>-->
+   
+   <section id="inicio">
+      <main>
+          <div class="box-usuarios">
+          </div>
+          
+          
+          <div class="sala">
+              <div class="parte-cima">
+                  <div class="foto-area">
+                    <img id="img" style="height: 100%" src="" />
+                  </div>
+                  <div class="select-area">
+                      <span class="box-select">
+                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 1">                  
+                         <label for="resposta" class="resposta-label">Opção numero 1</label>
+                      </span>
+                     
+                     <span class="box-select">
+                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 2">
+                         <label for="resposta" class="resposta-label">Opção numero 2</label>
+                      </span>
+                      <span class="box-select">
+                         <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 3">
+                         <label for="resposta" class="resposta-label">Opção numero 3</label>
+                      </span>
+                      <span class="box-select">
+                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 4">                 
+                         <label for="resposta" class="resposta-label">Opção numero 4</label>
+                      </span>
+                      
+                      
+                      <span class="box-select">
+                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 5">                        
+                         <label for="resposta" class="resposta-label">Opção numero 5</label>
+                      </span>
+
+
+                      
+                      
+                  </div>
+              </div>
+              <div class="parte-debaixo">
+                <div class="chat-area">
+                </div>
+                <input type="text" placeholder="Digite sua mensagem" name="mensagem" class="mensagem-usuario">
+                <button class="botao-enviar">Enviar</button>
+              </div>
+          </div>
+      </main>
+   </section>
+   
+   
+   <style>
+      
+      
+      .body {
+        width: 100%;
+        height:100%;
+      }
+     .corpo {
+       width:100%;
+       height:100%;
+     }
+     #inicio {
+       background-color:pink;
+       width:100%;
+       height:100%;
+       
+     }
+     #inicio main {
+     width: 100%;
+     display: flex;
+     justify-content: center;
+     height: 100%;
+     align-items: center;
+     }
+    .box-usuarios {
+    background-color: aqua;
+    height: 100vh;
+    width: 12em;
+    border: 0;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+    flex-wrap: wrap-reverse;
+    overflow-x: hidden;
+    position: fixed;
+    left: 0;
+
+    }
+    .usuarios-container {
+    padding: .5em;
+    width: 100%;
+    height: 4em;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+    border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+     }
+     .foto-usuario {
+    width: 27%;
+    height: 2.8em;
+    background-color: #FFFFFF;
+    border-radius: 100%;
+    margin-bottom: .7em;
+     }
+     .nick-usuario {
+    font-family: sans-serif;
+    width: 61%;
+    height: auto;
+    margin-left: .5em;
+    margin-top: -1.6em;
+    font-weight: bold;
+     }
+    .pontos-usuario {
+    font-family: sans-serif;
+    height: auto;
+    font-weight: bold;
+    width: 52%;
+    text-align: end;
+    margin-top: -2.5em;
+    }
+     
+    .sala {
+    padding: 2em;
+    width: 65em;
+    height: 36em;
+    background-color: beige;
+    margin-left: 10.9em;
+    box-shadow: 0 4px 14px 0 rgba(110,110,110,0.32);
+    }
+    .parte-cima {
+    width: 97%;
+    background: aqua;
+    height: 22em;
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    }
+    .parte-debaixo {
+    width: 100%;
+    background: blue;
+    margin-top: 1em;
+    display: flex;
+    flex-direction: row;
+    height: 10.9em;
+    flex-wrap: wrap;
+    }
+    .chat-area {
+    display: flex;
+    width: 100%;
+    height: 5.3em;
+    background-color: #d4d4d4;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+    overflow-y: scroll;
+    }
+    .mensagem-usuario {
+    width: 87%;
+    height: 3.3EM;
+    PADDING: 0em 1em;
+    font-family: sans-serif;
+    font-size: 1.2em;
+    border: 0;
+    /* border-bottom: 1px solid black; */
+    /* border-left: 1px solid black; */
+    /* border-right: 1px solid black; */
+    }
+    
+    .botao-enviar {
+          width: 9.3%;
+    }
+    .mensagem-usuario:focus,
+    .botao-enviar:focus {
+
+  outline: thin dotted;
+    outline: 0px auto -webkit-focus-ring-color;
+    outline-offset: 0px
+
+    }
+    .escrita-usuario {
+    font-family: sans-serif;
+    margin-top: 1em;
+    }
+    .nome {
+      color:blue;
+    }
+    
+    .foto-area {
+    width: 59%;
+    height: 100%;
+    background-color: crimson;
+    }
+    .select-area {
+    height: 100%;
+    width: 38%;
+    background: antiquewhite;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    }
+    .box-select {
+      width: 100%;
+    height: 2em;
+    display: flex;
+    /* justify-content: flex-end; */
+    align-items: center;
+    }
+    
+    .select {
+          width: 2em;
+    height: 1.5em;
+    }
+    .resposta-label {
+          font-family: sans-serif;
+    }
+     /* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+   </style>
+   
+   
+   
+   
+    <!-- socket.io -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+    socket = io('http://localhost:8080');
+
+  var socket_id = ""
+  
+    socket.on("joinRoom", function(data,id) {
+      
+      $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+data+' entrou na sala:</span></p>')
+      $('.chat-area').scrollTop(1000);
+      $('.box-usuarios').append('<div id="'+id+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+data+'</h3><p class="pontos-usuario">3101</p></div>')
+
+    })
+    
+    socket.on('image',function(img){
+
+        document.getElementById("img").src = "data:image/png;base64,"+img+""
+    });
+    socket.on("meJoinRoom", function(data,myId) {
+      var arry = JSON.parse(JSON.stringify(data));
+      console.log(arry)
+      for(var i = 0;arry.length>=i;i++){
+      
+      if(arry[i]!=undefined && arry[i].socketId==myId){
+        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container" style="background-color:red;"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">3101</p></div>')
+        $('.chat-area').append('<p class="escrita-usuario"><span class="nome">você entrou na sala:</span></p>')
+        socket_id = arry[i].socketId;
+
+      } else if (arry[i]!=undefined){
+        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">3101</p></div>')
+      }      
+        
+      }
+      
+      socket.emit('nextMovie');
+     
+      
+    })
+
+    socket.on("outRoom", function(data,id) {
+      $("#"+id).remove();
+      console.log($("#"+id).remove());
+    })
+    
+    socket.on("receiveMsg",function(user,msg){
+     
+      $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+user+':</span> '+msg+'</p>')
+      $(".chat-area").scrollTop(1000);
+
+    });
+    
+    socket.on("meReceiveMsg",function(user,msg){
+     
+     $('.chat-area').append('<p class="escrita-usuario"><span style="color:red;"class="nome">~'+user+':</span> '+msg+'</p>')
+     $(".chat-area").scrollTop(1000);
+
+    });
+    
+     $('.mensagem-usuario').keydown(function (e) {
+     if (e.which === 13) {
+       sendMsg($('.mensagem-usuario').val());
+       $('.mensagem-usuario').val('');
+     }
+ });
+
+    function sendMsg(msg){
+      var href = location.href;
+      socket.emit('sendMsg',socket_id,msg,href.match(/([^\/]*)\/*$/)[1]);
+      
+    }
+
+    $(function(){
+      var href = location.href;
+      socket.emit("joinRoom",href.match(/([^\/]*)\/*$/)[1])
+
+      $("#title").append('SALA: '+href.match(/([^\/]*)\/*$/)[1]);
+
+    });
+    
+    </script>
+  </body>
+</html>

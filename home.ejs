@@ -1,0 +1,59 @@
+
+
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  </head>
+  <body>
+  
+
+      <a id="loginviasocket" href="/room/harry">Login </a> SALA HARRY
+    </p>
+    <p>
+      <a id="logoutviasocket" href="/room/string">Logout</a> SALA String
+    <!-- socket.io -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+
+    <script type="text/javascript">
+    socket = io('http://localhost:8080');
+    socket.on("sessiondata", function(data) {
+      console.info("sessiondata event received. Check the console");
+      console.info("sessiondata is ", data);
+    })
+    socket.on("logged_in", function(data) {
+      console.info("logged_in event received. Check the console");
+      console.info("sessiondata after logged_in event is ", data);
+    }) 
+    socket.on("logged_out","harry", function(data) {
+      console.info("logged_out event received. Check the console");
+      console.info("sessiondata after logged_out event is ", data);
+    }) 
+    socket.on("receber", function(data) {
+      console.log('recebiii')
+      alert.show(data)
+    }) 
+     socket.on("home", function(data) {
+      console.log('recebiii')
+      Alert.show(data)
+    }) 
+    document.getElementById("loginviasocket").addEventListener("click", function(e) {
+      socket.emit("entrar_sala","harry");
+      e.preventDefault();
+    })
+    document.getElementById("logoutviasocket").addEventListener("click", function(e) {
+      socket.emit("logout","harry");
+      e.preventDefault();
+    })  
+
+    $(window).on('beforeunload', function(){
+    socket.close();
+    });
+    
+    </script>
+  </body>
+</html>
