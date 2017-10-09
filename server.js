@@ -25,6 +25,12 @@
 var numeroPlay = 0
 var numero = ""
 
+app.get('/teste', function(req, res) {
+    res.json({nome:'beto',idade : 24}); // Renders handlebar template with above json data
+});
+
+
+
 io.use(function(socket, next) {
    var data = socket.request;
    cookie(data, {}, function(err) {
@@ -201,9 +207,9 @@ function nameSocket(room,socketId){
     }
 }
 
-
+var similires = []
 function nextMovie(socket){
-//console.log(new Date())
+console.log(new Date())
 var http = require("https");
 
 var options = {
@@ -215,6 +221,7 @@ var options = {
 };
 
 var req = http.request(options, function (res) {
+  similires = [];
   var chunks = [];
 
   res.on("data", function (chunk) {
@@ -223,11 +230,10 @@ var req = http.request(options, function (res) {
 
   res.on("end", function () {
     var body = Buffer.concat(chunks);
-    data = JSON.parse(body.toString());
-    filme = data.results[randomMovie()]
- //   console.log(filme)
-  //similarMovie(filme.id);
-    return getImageMovie(filme.backdrop_path,socket);
+   var  data = JSON.parse(body.toString());
+   var filme = data.results[randomMovie()]
+    similires.push(filme);
+    getImageMovie(filme.backdrop_path,filme.id,socket);
 
 
   });
@@ -239,22 +245,23 @@ req.end();
 }
 
 function randomPage(){
-  return Math.floor((Math.random()*60)+1);
+  return Math.floor((Math.random()*100)+0);
 
 }
 
 function randomMovie(){
-  return Math.floor((Math.random()*10)+1);
+  return Math.floor((Math.random()*19)+0);
 
 }
 
-function similarMovie(movie_id){
+function similarMovie(movie_id,socket){
+    
 var http = require("https");
   var options = {
   "method": "GET",
   "hostname": "api.themoviedb.org",
   "port": null,
-  "path": "/3/movie/72545/similar?language=pt-BR&api_key="+API,
+  "path": "/3/movie/"+movie_id+"/similar?language=pt-BR&api_key="+API,
   "headers": {}
   };
 
@@ -267,9 +274,11 @@ var req = http.request(options, function (res) {
 
   res.on("end", function () {
     var body = Buffer.concat(chunks);
-    data = JSON.parse(body.toString());
-   // console.log(data.results)
-
+    var data = JSON.parse(body.toString());
+   for (var i = 0; i < 7; i++) {
+       similires.push(data.results[i]);
+   }
+    compressAndResize('image.png',socket); 
   });
 });
 
@@ -278,7 +287,7 @@ req.end();
 }
 
 
-function getImageMovie(image,socket){
+function getImageMovie(image,movie_id,socket){
 
   var http = require('https'),                                                
     Stream = require('stream').Transform,                                  
@@ -295,7 +304,7 @@ http.request(url, function(response) {
 
   response.on('end', function() {                                             
     fs.writeFileSync('image.png', data.read()); 
-    compressAndResize('image.png',socket);  
+    similarMovie(movie_id,socket);
   });                                                                         
 }).end();
 }
@@ -303,17 +312,39 @@ http.request(url, function(response) {
 
 function compressAndResize (imageUrl,socket) {
 var Jimp = require("jimp");
- 
+console.log(new Date()) 
 // open a file called "lenna.png" 
 Jimp.read(imageUrl, function (err, lenna) {
     if (err) throw err;
-    lenna.resize(550, 300) 
+    lenna.resize(800, 400) 
          .quality(60)            // resize 
          .getBuffer(Jimp.MIME_JPEG,function(err, buffer){ // I have other Options like png etc.
-
-                socket.emit('image',Buffer(buffer).toString('base64'));
+                console.log(new Date())
+                shuffle(similires)
+                console.log(similires);
+                var nomes=[]
+                for(var i=0;i<similires.length;i++){
+                    
+                    nomes.push(similires[i].title)
+                }
+                socket.emit('image',Buffer(buffer).toString('base64'),nomes);
+                console.log(new Date())
+                
 
             })
 });
 }
-server.listen(8080);
+
+var shuffle = function( el ) {
+ var i = el.length, j, tempi, tempj;
+ if ( i == 0 ) return el;
+ while ( --i ) {
+    j       = Math.floor( Math.random() * ( i + 1 ) );
+    tempi   = el[i];
+    tempj   = el[j];
+    similires[i] = tempj;
+    similires[j] = tempi;
+ }
+}
+
+server.listen(3000);
