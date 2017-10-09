@@ -1,5 +1,5 @@
 {
-  "name": "node-authentication",
+  "name": "pickplay",
   "main": "server.js",
   "dependencies": {
     "bcrypt-nodejs": "latest",
@@ -17,6 +17,23 @@
     "passport-facebook": "~1.0.2",
     "passport-google-oauth": "~0.1.5",
     "passport-local": "~0.1.6",
-    "passport-twitter": "~1.0.2"
-  }
+    "passport-twitter": "~1.0.2",
+    "socket.io": "^2.0.3"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "version": "1.0.0",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/betonix/discoverymovie.git"
+  },
+  "author": "Betonix",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/betonix/discoverymovie/issues"
+  },
+  "homepage": "https://github.com/betonix/discoverymovie#readme",
+  "description": ""
 }
