@@ -25,38 +25,50 @@
                   </div>
                   <div class="select-area">
                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 1">                  
-                         <label for="resposta" class="resposta-label">Opção numero 1</label>
+                      <input type="radio" class="select" name="resposta" id="resposta1" value="Opção numero 1">                  
+                         <label for="resposta" id="idResposta1" class="resposta-label"></label>
                       </span>
                      
                      <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 2">
-                         <label for="resposta" class="resposta-label">Opção numero 2</label>
+                      <input type="radio" class="select" name="resposta" id="resposta2" value="Opção numero 2">
+                         <label for="resposta"  id="idResposta2" class="resposta-label"></label>
                       </span>
                       <span class="box-select">
-                         <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 3">
-                         <label for="resposta" class="resposta-label">Opção numero 3</label>
+                         <input type="radio" class="select" name="resposta" id="resposta3" value="Opção numero 3">
+                         <label for="resposta" id="idResposta3" class="resposta-label"></label>
                       </span>
                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 4">                 
-                         <label for="resposta" class="resposta-label">Opção numero 4</label>
+                      <input type="radio" class="select" name="resposta" id="resposta4" value="Opção numero 4">                 
+                         <label for="resposta" id="idResposta4" class="resposta-label"></label>
                       </span>
                       
                       
                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta" value="Opção numero 5">                        
-                         <label for="resposta" class="resposta-label">Opção numero 5</label>
+                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                         <label for="resposta" id="idResposta5" class="resposta-label"></label>
                       </span>
-
-
                       
+                       <span class="box-select">
+                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                         <label for="resposta" id="idResposta6" class="resposta-label"></label>
+                      </span>
+                      
+                       <span class="box-select">
+                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                         <label for="resposta" id="idResposta7" class="resposta-label"></label>
+                      </span>
+                      
+                        <span class="box-select">
+                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                         <label for="resposta" id="idResposta8" class="resposta-label"></label>
+                      </span>
                       
                   </div>
               </div>
               <div class="parte-debaixo">
                 <div class="chat-area">
                 </div>
-                <input type="text" placeholder="Digite sua mensagem" name="mensagem" class="mensagem-usuario">
+                <input type="text" placeholder="Digite sua mensagem" name="mensagem" id="msgId" class="mensagem-usuario">
                 <button class="botao-enviar">Enviar</button>
               </div>
           </div>
@@ -209,6 +221,7 @@
     width: 59%;
     height: 100%;
     background-color: crimson;
+    overflow:hidden;
     }
     .select-area {
     height: 100%;
@@ -294,10 +307,11 @@ table {
   crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-    socket = io('http://localhost:3000');
-
+    socket = io('http://pickyplay-com.umbler.net');
+  socket.emit('nextMovie');
   var socket_id = ""
-  
+   $("#msgId").prop('disabled', true);
+    
     socket.on("joinRoom", function(data,id) {
       
       $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+data+' entrou na sala:</span></p>')
@@ -306,12 +320,23 @@ table {
 
     })
     
-    socket.on('image',function(img){
-
+    socket.on('image',function(img,opcoes){
+        console.log(opcoes)
         document.getElementById("img").src = "data:image/png;base64,"+img+""
+        $('#idResposta1').text(opcoes[0])
+        $('#idResposta2').text(opcoes[1])
+        $('#idResposta3').text(opcoes[2])
+        $('#idResposta4').text(opcoes[3])
+        $('#idResposta5').text(opcoes[4]) 
+        $('#idResposta6').text(opcoes[5])
+        $('#idResposta7').text(opcoes[6])
+        $('#idResposta8').text(opcoes[7])
+        
+        
     });
     socket.on("meJoinRoom", function(data,myId) {
       var arry = JSON.parse(JSON.stringify(data));
+      $("#msgId").prop('disabled', false);
       console.log(arry)
       for(var i = 0;arry.length>=i;i++){
       
@@ -326,8 +351,6 @@ table {
         
       }
       
-      socket.emit('nextMovie');
-     
       
     })
 
@@ -362,12 +385,10 @@ table {
       socket.emit('sendMsg',socket_id,msg,href.match(/([^\/]*)\/*$/)[1]);
       
     }
-
-    $(function(){
-      var href = location.href;
+    var href = location.href;
       socket.emit("joinRoom",href.match(/([^\/]*)\/*$/)[1])
-
-      $("#title").append('SALA: '+href.match(/([^\/]*)\/*$/)[1]);
+    $(function(){
+      
 
     });
     
