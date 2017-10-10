@@ -204,7 +204,7 @@
     .mensagem-usuario:focus,
     .botao-enviar:focus {
 
-  outline: thin dotted;
+	outline: thin dotted;
     outline: 0px auto -webkit-focus-ring-color;
     outline-offset: 0px
 
@@ -307,7 +307,7 @@ table {
   crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-    socket = io('http://pickyplay-com.umbler.net');
+    socket = io('http://localhost:3000');
   socket.emit('nextMovie');
   var socket_id = ""
    $("#msgId").prop('disabled', true);
