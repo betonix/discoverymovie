@@ -322,7 +322,7 @@ table {
     
     socket.on('image',function(img,opcoes){
         console.log(opcoes)
-        document.getElementById("img").src = "data:image/png;base64,"+img+""
+        document.getElementById("img").src = "https://image.tmdb.org/t/p/w700_and_h392_bestv2/"+img+""
         $('#idResposta1').text(opcoes[0])
         $('#idResposta2').text(opcoes[1])
         $('#idResposta3').text(opcoes[2])

@@ -230,12 +230,12 @@ var req = http.request(options, function (res) {
   });
 
   res.on("end", function () {
-    var body = Buffer.concat(chunks);
+   var body = Buffer.concat(chunks);
    var  data = JSON.parse(body.toString());
    var filme = data.results[randomMovie()]
-    similires.push(filme);
-    getImageMovie(filme.backdrop_path,filme.id,socket);
-
+   similires.push(filme);
+ //getImageMovie(filme.backdrop_path,filme.id,socket);
+   similarMovie(filme.id,filme.backdrop_path,socket)
 
   });
 });
@@ -257,7 +257,7 @@ function randomMovie(){
 
 }
 
-function similarMovie(movie_id,socket){
+function similarMovie(movie_id,imageUrl,socket){
     
 var http = require("https");
   var options = {
@@ -281,7 +281,9 @@ var req = http.request(options, function (res) {
    for (var i = 0; i < 7; i++) {
        similires.push(data.results[i]);
    }
-    compressAndResize('image.png',socket); 
+ // compressAndResize('image.png',socket); 
+    compressAndResize(imageUrl,socket); 
+
   });
 });
 
@@ -315,27 +317,38 @@ http.request(url, function(response) {
 
 function compressAndResize (imageUrl,socket) {
 var Jimp = require("jimp");
-console.log(new Date()) 
-// open a file called "lenna.png" 
-Jimp.read(imageUrl, function (err, lenna) {
-    if (err) throw err;
-    lenna.resize(800, 400) 
-         .quality(60)            // resize 
-         .getBuffer(Jimp.MIME_JPEG,function(err, buffer){ // I have other Options like png etc.
-                console.log(new Date())
-                shuffle(similires)
-                console.log(similires);
-                var nomes=[]
-                for(var i=0;i<similires.length;i++){
+shuffle(similires)
+console.log(similires);
+var nomes=[]
+
+for(var i=0;i<similires.length;i++){
+    
+    nomes.push(similires[i].title)
+}
+
+socket.emit('image',imageUrl,nomes);
+
+// console.log(new Date()) 
+// // open a file called "lenna.png" 
+// Jimp.read(imageUrl, function (err, lenna) {
+//     if (err) throw err;
+//     lenna.resize(800, 400) 
+//          .quality(60)            // resize 
+//          .getBuffer(Jimp.MIME_JPEG,function(err, buffer){ // I have other Options like png etc.
+//                 console.log(new Date())
+//                 shuffle(similires)
+//                 console.log(similires);
+//                 var nomes=[]
+//                 for(var i=0;i<similires.length;i++){
                     
-                    nomes.push(similires[i].title)
-                }
-                socket.emit('image',Buffer(buffer).toString('base64'),nomes);
-                console.log(new Date())
+//                     nomes.push(similires[i].title)
+//                 }
+//                //socket.emit('image',Buffer(buffer).toString('base64'),nomes);
+//                 console.log(new Date())
                 
 
-            })
-});
+//             })
+// });
 }
 
 var shuffle = function( el ) {
