@@ -210,6 +210,7 @@ function nameSocket(room,socketId){
 var similires = []
 function nextMovie(socket){
 console.log(new Date())
+try{
 var http = require("https");
 
 var options = {
@@ -238,7 +239,9 @@ var req = http.request(options, function (res) {
 
   });
 });
-
+}catch(erro){
+	nextMovie(socket);
+}
 req.write("{}");
 req.end();
 
