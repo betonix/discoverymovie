@@ -132,7 +132,9 @@ room = ""
    var roomOut = socket.adapter.rooms[socket['sala']];
  //allRooms[socket['sala']].pop(session.nome)
    socket.to(socket['sala']).emit('outRoom',session.nome,socket.id);
-   allRooms[socket['sala']] = remoteSocket(room,socket.id);
+   console.log(allRooms[socket['sala']])
+   allRooms[socket['sala']] = remoteSocket(allRooms[socket['sala']],socket.id);
+   console.log(allRooms[socket['sala']])
    cont-=1;
 
  });
@@ -184,7 +186,7 @@ for (var i = room.length; i--; ) {
 
 function remoteSocket(room,socketId){
  var arrayRooms = []
-    for (var i = room.length; i--; ) {
+    for (var i = 0 ; i<room.length; i++) {
         
     if(room[i].socketId!=socketId){
         arrayRooms.push(room[i]);
@@ -248,7 +250,7 @@ req.end();
 }
 
 function randomPage(){
-  return Math.floor((Math.random()*100)+0);
+  return Math.floor((Math.random()*200)+0);
 
 }
 
@@ -322,8 +324,10 @@ console.log(similires);
 var nomes=[]
 
 for(var i=0;i<similires.length;i++){
-    
+    try{
     nomes.push(similires[i].title)
+  }catch(ee){
+  }
 }
 
 socket.emit('image',imageUrl,nomes);

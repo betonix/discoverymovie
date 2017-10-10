@@ -62,7 +62,7 @@
                       <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
                          <label for="resposta" id="idResposta8" class="resposta-label"></label>
                       </span>
-                      
+                      <button class="botao-proximo" onclick="proximo()" style="width: 50%;height: 10%;margin-top: 16%;">PROXIMO</button>
                   </div>
               </div>
               <div class="parte-debaixo">
@@ -358,7 +358,9 @@ table {
       $("#"+id).remove();
       console.log($("#"+id).remove());
     })
-    
+    function proximo(){
+      socket.emit('nextMovie');
+    }
     socket.on("receiveMsg",function(user,msg){
      
       $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+user+':</span> '+msg+'</p>')
