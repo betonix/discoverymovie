@@ -324,7 +324,7 @@ Jimp.read(imageUrl, function (err, lenna) {
          .getBuffer(Jimp.MIME_JPEG,function(err, buffer){ // I have other Options like png etc.
                 console.log(new Date())
                 shuffle(similires)
-                console.log(similires);
+                //console.log(similires);
                 var nomes=[]
                 for(var i=0;i<similires.length;i++){
                     
