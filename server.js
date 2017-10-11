@@ -93,21 +93,19 @@ room = ""
       allRooms[room] = []
       obj = {
         socketId : socket.id,
-        nick : session.nome
+        nick : session.nome,
+        pontos : 0
       }    
       allRooms[room].push(obj)
       
     }else{
-
-      obj = {
-        socketId : socket.id,
-        nick : session.nome
-      }    
+  
       var nome_user = namePlay(allRooms[room],session.nome)
       socket.handshake.session.nome = nome_user
        obj = {
         socketId : socket.id,
-        nick : nome_user
+        nick : nome_user,
+        pontos : 0
       }    
       allRooms[room].push(obj)
     }
@@ -118,7 +116,7 @@ room = ""
     
     var array = mountAll(allRooms[room],socket.id);
     
-    socket.to(room).emit('joinRoom',session.nome,socket.id);
+    socket.to(room).emit('joinRoom',obj,socket.id);
     socket.adapter.rooms[room].sockets.nome=session.nome;
     socket.emit('meJoinRoom',array,socket.id);
 
@@ -139,10 +137,28 @@ room = ""
 
  });
  
- socket.on('nextMovie',function() {
-     
-     nextMovie(socket);
+ socket.on('nextMovie',function(room) {
+     console.log(room)
+     nextMovie(socket,room);
  })
+
+ socket.on('resposta',function(resposta,nomeSala){
+
+  if (verificaResposta(nomeSala,resposta)){
+    somaPonto(nomeSala,socket.id)
+
+  }else{
+    retiraPontos(nomeSala,socket.id)
+
+  }
+
+  players = []
+  for(var i = 0; i<allRooms[nomeSala].length;i++){
+    players.push({nick:allRooms[nomeSala][i].nick,pontos:allRooms[nomeSala][i].pontos,socketId:allRooms[nomeSala][i].socketId})
+  }
+  io.sockets.in(nomeSala).emit('pontos',players)
+
+ }) 
 
  socket.on('sendMsg',function(socketId,msg,room){
    var  user = nameSocket(allRooms[room],socketId)
@@ -210,7 +226,7 @@ function nameSocket(room,socketId){
 }
 
 var similires = []
-function nextMovie(socket){
+function nextMovie(socket,room){
 console.log(new Date())
 try{
 var http = require("https");
@@ -237,12 +253,13 @@ var req = http.request(options, function (res) {
    var filme = data.results[randomMovie()]
    similires.push(filme);
  //getImageMovie(filme.backdrop_path,filme.id,socket);
-   similarMovie(filme.id,filme.backdrop_path,socket)
+   allRooms[socket['sala']].title = filme.title;
+   similarMovie(filme.id,filme.backdrop_path,socket,room)
 
   });
 });
 }catch(erro){
-	nextMovie(socket);
+	nextMovie(socket,room);
 }
 req.write("{}");
 req.end();
@@ -259,7 +276,7 @@ function randomMovie(){
 
 }
 
-function similarMovie(movie_id,imageUrl,socket){
+function similarMovie(movie_id,imageUrl,socket,room){
     
 var http = require("https");
   var options = {
@@ -284,7 +301,7 @@ var req = http.request(options, function (res) {
        similires.push(data.results[i]);
    }
  // compressAndResize('image.png',socket); 
-    compressAndResize(imageUrl,socket); 
+    compressAndResize(imageUrl,socket,room); 
 
   });
 });
@@ -317,10 +334,10 @@ http.request(url, function(response) {
 }
 
 
-function compressAndResize (imageUrl,socket) {
+function compressAndResize (imageUrl,socket,room) {
 var Jimp = require("jimp");
 shuffle(similires)
-console.log(similires);
+//console.log(similires);
 var nomes=[]
 
 for(var i=0;i<similires.length;i++){
@@ -329,8 +346,9 @@ for(var i=0;i<similires.length;i++){
   }catch(ee){
   }
 }
+console.log(allRooms);
 
-socket.emit('image',imageUrl,nomes);
+io.sockets.in(room).emit('image',imageUrl,nomes);
 
 // console.log(new Date()) 
 // // open a file called "lenna.png" 
@@ -366,5 +384,44 @@ var shuffle = function( el ) {
     similires[j] = tempi;
  }
 }
+
+
+function verificaResposta(sala,resposta){
+
+ if(allRooms[sala].title == resposta){
+
+    return true;
+  }else{
+
+    return false;
+  }
+
+}
+
+function retiraPontos(sala,socketId){
+
+ for (var i = 0; i<allRooms[sala].length;i++) {
+   if (allRooms[sala][i].socketId == socketId){
+    if (allRooms[sala][i].pontos > 0){
+    allRooms[sala][i].pontos = allRooms[sala][i].pontos - 7
+    }
+   }
+ }
+
+}
+
+function somaPonto(sala,socketId){
+
+for (var i = 0; i<allRooms[sala].length;i++) {
+   if (allRooms[sala][i].socketId == socketId){
+    console.log("somou")
+
+    allRooms[sala][i].pontos = allRooms[sala][i].pontos + 7
+   }
+ }
+
+}
+
+
 
 server.listen(3000);

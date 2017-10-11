@@ -25,41 +25,41 @@
                   </div>
                   <div class="select-area">
                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta1" value="Opção numero 1">                  
+                      <input type="radio" class="select" name="resposta" id="resposta" value="idResposta1">                  
                          <label for="resposta" id="idResposta1" class="resposta-label"></label>
                       </span>
                      
                      <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta2" value="Opção numero 2">
+                      <input type="radio" class="select" name="resposta" id="resposta2" value="idResposta2">
                          <label for="resposta"  id="idResposta2" class="resposta-label"></label>
                       </span>
                       <span class="box-select">
-                         <input type="radio" class="select" name="resposta" id="resposta3" value="Opção numero 3">
+                         <input type="radio" class="select" name="resposta" id="resposta3" value="idResposta3">
                          <label for="resposta" id="idResposta3" class="resposta-label"></label>
                       </span>
                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta4" value="Opção numero 4">                 
+                      <input type="radio" class="select" name="resposta" id="resposta4" value="idResposta4">                 
                          <label for="resposta" id="idResposta4" class="resposta-label"></label>
                       </span>
                       
                       
                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                      <input type="radio" class="select" name="resposta" id="resposta5" value="idResposta5">                        
                          <label for="resposta" id="idResposta5" class="resposta-label"></label>
                       </span>
                       
                        <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                      <input type="radio" class="select" name="resposta" id="resposta6" value="idResposta6">                        
                          <label for="resposta" id="idResposta6" class="resposta-label"></label>
                       </span>
                       
                        <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                      <input type="radio" class="select" name="resposta" id="resposta7" value="idResposta7">                        
                          <label for="resposta" id="idResposta7" class="resposta-label"></label>
                       </span>
                       
                         <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta5" value="Opção numero 5">                        
+                      <input type="radio" class="select" name="resposta" id="resposta8" value="idResposta8">                        
                          <label for="resposta" id="idResposta8" class="resposta-label"></label>
                       </span>
                       <button class="botao-proximo" onclick="proximo()" style="width: 50%;height: 10%;margin-top: 16%;">PROXIMO</button>
@@ -307,16 +307,22 @@ table {
   crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-    socket = io('http://pickyplay-com.umbler.net');
-  socket.emit('nextMovie');
+    socket = io('http://localhost:3000',{
+    'reconnection': true,
+    'reconnectionDelay': 50000,
+    'reconnectionAttempts': 10
+    });
+    var href = location.href;
+    var nomeSala = href.match(/([^\/]*)\/*$/)[1]
+ 
   var socket_id = ""
    $("#msgId").prop('disabled', true);
     
     socket.on("joinRoom", function(data,id) {
       
-      $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+data+' entrou na sala:</span></p>')
+      $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+data.nick+' entrou na sala:</span></p>')
       $('.chat-area').scrollTop(1000);
-      $('.box-usuarios').append('<div id="'+id+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+data+'</h3><p class="pontos-usuario">3101</p></div>')
+      $('.box-usuarios').append('<div id="'+id+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+data.nick+'</h3><p class="pontos-usuario">'+data.pontos+'</p></div>')
 
     })
     
@@ -341,12 +347,12 @@ table {
       for(var i = 0;arry.length>=i;i++){
       
       if(arry[i]!=undefined && arry[i].socketId==myId){
-        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container" style="background-color:red;"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">3101</p></div>')
+        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container" style="background-color:red;"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">'+arry[i].pontos+'</p></div>')
         $('.chat-area').append('<p class="escrita-usuario"><span class="nome">você entrou na sala:</span></p>')
         socket_id = arry[i].socketId;
 
       } else if (arry[i]!=undefined){
-        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">3101</p></div>')
+        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">'+arry[i].pontos+'</p></div>')
       }      
         
       }
@@ -359,7 +365,23 @@ table {
       console.log($("#"+id).remove());
     })
     function proximo(){
-      socket.emit('nextMovie');
+
+      var rates = document.getElementsByName('resposta');
+      var rate_value;
+
+      for(var i = 0; i < rates.length; i++){
+          if(rates[i].checked){
+              rate_value = rates[i].value;
+          }
+      }
+
+      console.log(rate_value);
+      resposta = $('#'+rate_value).text();
+      console.log(resposta)
+      var href = location.href;
+    // socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
+      socket.emit('resposta',resposta,nomeSala);
+
     }
     socket.on("receiveMsg",function(user,msg){
      
@@ -368,6 +390,24 @@ table {
 
     });
     
+    socket.on("pontos",function(players){
+      $('.box-usuarios').html('');
+
+      console.log(players)
+      for(var i = 0;i<players.length;i++){
+      
+      if(players[i].socketId==socket_id){
+        $('.box-usuarios').append('<div id="'+players[i].socketId+'"class="usuarios-container" style="background-color:red;"><span class="foto-usuario"></span><h3 class="nick-usuario">'+players[i].nick+'</h3><p class="pontos-usuario">'+players[i].pontos+'</p></div>')
+        //socket_id = arry[i].socketId;
+
+      } else{
+        $('.box-usuarios').append('<div id="'+players[i].socketId+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+players[i].nick+'</h3><p class="pontos-usuario">'+players[i].pontos+'</p></div>')
+      }
+      }      
+
+    });
+
+
     socket.on("meReceiveMsg",function(user,msg){
      
      $('.chat-area').append('<p class="escrita-usuario"><span style="color:red;"class="nome">~'+user+':</span> '+msg+'</p>')
@@ -390,7 +430,7 @@ table {
     var href = location.href;
       socket.emit("joinRoom",href.match(/([^\/]*)\/*$/)[1])
     $(function(){
-      
+       socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
 
     });
     
