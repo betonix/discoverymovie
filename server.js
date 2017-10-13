@@ -282,14 +282,15 @@ var req = http.request(options, function (res) {
    var  data = JSON.parse(body.toString());
    if(data.results!=undefined){
       var filme = data.results[randomMovie()]
+      allRooms[socket['sala']].title = filme.title;
+      similarMovie(filme.id,filme.backdrop_path,socket,room)
    }else{
       nextMovie(socket,room);
    }
    
    similires.push(filme);
  //getImageMovie(filme.backdrop_path,filme.id,socket);
-   allRooms[socket['sala']].title = filme.title;
-   similarMovie(filme.id,filme.backdrop_path,socket,room)
+   
 
   });
 });
