@@ -98,6 +98,8 @@ room = ""
       }    
       allRooms[room].push(obj)
       
+     
+
     }else{
   
       var nome_user = namePlay(allRooms[room],session.nome)
@@ -111,6 +113,14 @@ room = ""
     }
     
 
+      setInterval(function(){
+
+      nextMovie(socket,room);
+      io.sockets.to(room).emit("tempo",10);
+
+      },10000);
+
+
     socket.join(room);
     socket['sala'] = room;
     
@@ -121,6 +131,11 @@ room = ""
     socket.emit('meJoinRoom',array,socket.id);
 
    // console.log(array)
+
+
+ });
+
+ socket.on('trocarNick',function(socketId,newNick){
 
 
  });
@@ -139,7 +154,7 @@ room = ""
  
  socket.on('nextMovie',function(room) {
      console.log(room)
-     nextMovie(socket,room);
+     //nextMovie(socket,room);
  })
 
  socket.on('resposta',function(resposta,nomeSala){
@@ -267,7 +282,7 @@ req.end();
 }
 
 function randomPage(){
-  return Math.floor((Math.random()*200)+0);
+  return Math.floor((Math.random()*50)+0);
 
 }
 

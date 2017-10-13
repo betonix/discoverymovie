@@ -2,438 +2,577 @@
 
 <!DOCTYPE html>
 <html lang="" class="corpo">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PickPlay - Room 1</title>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PickPlay - Room 1</title>
 
-  </head>
-  <body class="body">
-    <!--<h1 id="title" class="text-center"></h1>-->
-   
-   <section id="inicio">
-      <main>
-          <div class="box-usuarios">
-          </div>
-          
-          
-          <div class="sala">
-              <div class="parte-cima">
-                  <div class="foto-area">
-                    <img id="img" style="height: 100%" src="" />
-                  </div>
-                  <div class="select-area">
-                      <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta" value="idResposta1">                  
-                         <label for="resposta" id="idResposta1" class="resposta-label"></label>
-                      </span>
-                     
-                     <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta2" value="idResposta2">
-                         <label for="resposta"  id="idResposta2" class="resposta-label"></label>
-                      </span>
-                      <span class="box-select">
-                         <input type="radio" class="select" name="resposta" id="resposta3" value="idResposta3">
-                         <label for="resposta" id="idResposta3" class="resposta-label"></label>
-                      </span>
-                      <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta4" value="idResposta4">                 
-                         <label for="resposta" id="idResposta4" class="resposta-label"></label>
-                      </span>
-                      
-                      
-                      <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta5" value="idResposta5">                        
-                         <label for="resposta" id="idResposta5" class="resposta-label"></label>
-                      </span>
-                      
-                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta6" value="idResposta6">                        
-                         <label for="resposta" id="idResposta6" class="resposta-label"></label>
-                      </span>
-                      
-                       <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta7" value="idResposta7">                        
-                         <label for="resposta" id="idResposta7" class="resposta-label"></label>
-                      </span>
-                      
-                        <span class="box-select">
-                      <input type="radio" class="select" name="resposta" id="resposta8" value="idResposta8">                        
-                         <label for="resposta" id="idResposta8" class="resposta-label"></label>
-                      </span>
-                      <button class="botao-proximo" onclick="proximo()" style="width: 50%;height: 10%;margin-top: 16%;">PROXIMO</button>
-                  </div>
-              </div>
-              <div class="parte-debaixo">
-                <div class="chat-area">
-                </div>
-                <input type="text" placeholder="Digite sua mensagem" name="mensagem" id="msgId" class="mensagem-usuario">
-                <button class="botao-enviar">Enviar</button>
-              </div>
-          </div>
-      </main>
-   </section>
-   
-   
-   <style>
-      
-      
-      .body {
-        width: 100%;
-        height:100%;
-      }
-     .corpo {
-       width:100%;
-       height:100%;
-     }
-     #inicio {
-       background-color:pink;
-       width:100%;
-       height:100%;
-       
-     }
-     #inicio main {
-     width: 100%;
-     display: flex;
-     justify-content: center;
-     height: 100%;
-     align-items: center;
-     }
-    .box-usuarios {
-    background-color: aqua;
-    height: 100vh;
-    width: 12em;
-    border: 0;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: scroll;
-    flex-wrap: wrap-reverse;
-    overflow-x: hidden;
-    position: fixed;
-    left: 0;
+</head>
+<body class="body">
+  <!--<h1 id="title" class="text-center"></h1>-->
 
-    }
-    .usuarios-container {
-    padding: .5em;
+  <section id="inicio">
+    <main>
+      <div class="box-usuarios">
+      </div>
+
+      <div class="sala">
+      <p> Qual o nome do filme</p><p id="demo"></p>
+        <div class="parte-cima">
+        
+          <div class="foto-area">
+            <img id="img" style="height: 100%" src="" />
+          </div>
+          <div class="select-area">
+            <span class="box-select">
+              <input type="radio" class="select" name="resposta" id="resposta" value="idResposta1">                  
+              <label for="resposta" id="idResposta1" class="resposta-label"></label>
+            </span>
+
+            <span class="box-select">
+              <input type="radio" class="select" name="resposta" id="resposta2" value="idResposta2">
+              <label for="resposta2"  id="idResposta2" class="resposta-label"></label>
+            </span>
+            <span class="box-select">
+             <input type="radio" class="select" name="resposta" id="resposta3" value="idResposta3">
+             <label for="resposta3" id="idResposta3" class="resposta-label"></label>
+           </span>
+           <span class="box-select">
+            <input type="radio" class="select" name="resposta" id="resposta4" value="idResposta4">                 
+            <label for="resposta4" id="idResposta4" class="resposta-label"></label>
+          </span>
+
+
+          <span class="box-select">
+            <input type="radio" class="select" name="resposta" id="resposta5" value="idResposta5">                        
+            <label for="resposta5" id="idResposta5" class="resposta-label"></label>
+          </span>
+
+          <span class="box-select">
+            <input type="radio" class="select" name="resposta" id="resposta6" value="idResposta6">                        
+            <label for="resposta6" id="idResposta6" class="resposta-label"></label>
+          </span>
+
+          <span class="box-select">
+            <input type="radio" class="select" name="resposta" id="resposta7" value="idResposta7">                        
+            <label for="resposta7" id="idResposta7" class="resposta-label"></label>
+          </span>
+
+          <span class="box-select">
+            <input type="radio" class="select" name="resposta" id="resposta8" value="idResposta8">                        
+            <label for="resposta8" id="idResposta8" class="resposta-label"></label>
+          </span>
+          <button class="botao-proximo" onclick="proximo()" style="width: 50%;height: 10%;margin-top: 16%;">PROXIMO</button>
+        </div>
+      </div>
+      <div class="parte-debaixo">
+        <div class="chat-area">
+        </div>
+        <input type="text" placeholder="Digite sua mensagem" name="mensagem" id="msgId" class="mensagem-usuario">
+        <button class="botao-enviar">Enviar</button>
+      </div>
+    </div>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div style="margin-left: 20%;margin-top: 12%;">
+     <label id = "inputNick" for="nick" style="align-items: center;">Nick</label>
+     <input type="text" name="nick" id="nickModal" style="height: 40px; width: 70%;font-size: 40px;">
+    </div>
+  </div>
+
+</div>
+
+  </main>
+</section>
+
+
+<style>
+
+
+  .body {
     width: 100%;
-    height: 4em;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    border-bottom: 1px solid rgba(17, 17, 17, 0.2);
-     }
-     .foto-usuario {
-    width: 27%;
-    height: 2.8em;
-    background-color: #FFFFFF;
-    border-radius: 100%;
-    margin-bottom: .7em;
-     }
-     .nick-usuario {
-    font-family: sans-serif;
-    width: 61%;
-    height: auto;
-    margin-left: .5em;
-    margin-top: -1.6em;
-    font-weight: bold;
-     }
-    .pontos-usuario {
-    font-family: sans-serif;
-    height: auto;
-    font-weight: bold;
-    width: 52%;
-    text-align: end;
-    margin-top: -2.5em;
-    }
-     
-    .sala {
-    padding: 2em;
-    width: 65em;
-    height: 36em;
-    background-color: beige;
-    margin-left: 10.9em;
-    box-shadow: 0 4px 14px 0 rgba(110,110,110,0.32);
-    }
-    .parte-cima {
-    width: 97%;
-    background: aqua;
-    height: 22em;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    }
-    .parte-debaixo {
-    width: 100%;
-    background: blue;
-    margin-top: 1em;
-    display: flex;
-    flex-direction: row;
-    height: 10.9em;
-    flex-wrap: wrap;
-    }
-    .chat-area {
-    display: flex;
-    width: 100%;
-    height: 5.3em;
-    background-color: #d4d4d4;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 1em;
-    overflow-y: scroll;
-    }
-    .mensagem-usuario {
-    width: 87%;
-    height: 3.3EM;
-    PADDING: 0em 1em;
-    font-family: sans-serif;
-    font-size: 1.2em;
-    border: 0;
-    /* border-bottom: 1px solid black; */
-    /* border-left: 1px solid black; */
-    /* border-right: 1px solid black; */
-    }
-    
-    .botao-enviar {
-          width: 9.3%;
-    }
-    .mensagem-usuario:focus,
-    .botao-enviar:focus {
+    height:100%;
+  }
+  .corpo {
+   width:100%;
+   height:100%;
+ }
+ #inicio {
+   background-color:pink;
+   width:100%;
+   height:100%;
+
+ }
+ #inicio main {
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   height: 100%;
+   align-items: center;
+ }
+ .box-usuarios {
+  background-color: aqua;
+  height: 100vh;
+  width: 12em;
+  border: 0;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  flex-wrap: wrap-reverse;
+  overflow-x: hidden;
+  position: fixed;
+  left: 0;
+
+}
+.usuarios-container {
+  padding: .5em;
+  width: 100%;
+  height: 4em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: flex-start;
+  border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+  cursor: pointer;
+}
+.foto-usuario {
+  width: 27%;
+  height: 2.8em;
+  background-color: #FFFFFF;
+  border-radius: 100%;
+  margin-bottom: .7em;
+}
+.nick-usuario {
+  font-family: sans-serif;
+  width: 61%;
+  height: auto;
+  margin-left: .5em;
+  margin-top: -1.6em;
+  font-weight: bold;
+}
+.pontos-usuario {
+  font-family: sans-serif;
+  height: auto;
+  font-weight: bold;
+  width: 52%;
+  text-align: end;
+  margin-top: -2.5em;
+}
+
+.sala {
+  padding: 2em;
+  width: 65em;
+  height: 36em;
+  background-color: beige;
+  margin-left: 10.9em;
+  box-shadow: 0 4px 14px 0 rgba(110,110,110,0.32);
+}
+.parte-cima {
+  width: 97%;
+  background: aqua;
+  height: 22em;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+.parte-debaixo {
+  width: 100%;
+  background: blue;
+  margin-top: 1em;
+  display: flex;
+  flex-direction: row;
+  height: 10.9em;
+  flex-wrap: wrap;
+}
+.chat-area {
+  display: flex;
+  width: 100%;
+  height: 5.3em;
+  background-color: #d4d4d4;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em;
+  overflow-y: scroll;
+}
+.mensagem-usuario {
+  width: 87%;
+  height: 3.3EM;
+  PADDING: 0em 1em;
+  font-family: sans-serif;
+  font-size: 1.2em;
+  border: 0;
+  /* border-bottom: 1px solid black; */
+  /* border-left: 1px solid black; */
+  /* border-right: 1px solid black; */
+}
+
+.botao-enviar {
+  width: 9.3%;
+}
+.mensagem-usuario:focus,
+.botao-enviar:focus {
 
 	outline: thin dotted;
-    outline: 0px auto -webkit-focus-ring-color;
-    outline-offset: 0px
+  outline: 0px auto -webkit-focus-ring-color;
+  outline-offset: 0px
 
-    }
-    .escrita-usuario {
-    font-family: sans-serif;
-    margin-top: 1em;
-    }
-    .nome {
-      color:blue;
-    }
-    
-    .foto-area {
-    width: 59%;
-    height: 100%;
-    background-color: crimson;
-    overflow:hidden;
-    }
-    .select-area {
-    height: 100%;
-    width: 38%;
-    background: antiquewhite;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    }
-    .box-select {
-      width: 100%;
-    height: 2em;
-    display: flex;
-    /* justify-content: flex-end; */
-    align-items: center;
-    }
-    
-    .select {
-          width: 2em;
-    height: 1.5em;
-    }
-    .resposta-label {
-          font-family: sans-serif;
-    }
+}
+.escrita-usuario {
+  font-family: sans-serif;
+  margin-top: 1em;
+}
+.nome {
+  color:blue;
+}
+
+.foto-area {
+  width: 59%;
+  height: 100%;
+  background-color: crimson;
+  overflow:hidden;
+}
+.select-area {
+  height: 100%;
+  width: 38%;
+  background: antiquewhite;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.box-select {
+  width: 100%;
+  height: 2em;
+  display: flex;
+  /* justify-content: flex-end; */
+  align-items: center;
+}
+
+.select {
+  width: 2em;
+  height: 1.5em;
+}
+.resposta-label {
+  font-family: sans-serif;
+}
+.usuario-modal{
+  position: fixed;
+  width: 52%;
+  height: 62%;
+  background-color: #fff;
+  top: 16%;
+  left: 30%;
+  right: 0;
+  bottom: 0;
+  box-shadow: 0 4px 14px 0 rgba(110,110,110,0.5);
+  border-radius: 8px;
+  z-index: -1;
+  display: none;
+}
      /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
-*/
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+   */
+   html, body, div, span, applet, object, iframe,
+   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+   a, abbr, acronym, address, big, cite, code,
+   del, dfn, em, img, ins, kbd, q, s, samp,
+   small, strike, strong, sub, sup, tt, var,
+   b, u, i, center,
+   dl, dt, dd, ol, ul, li,
+   fieldset, form, label, legend,
+   table, caption, tbody, tfoot, thead, tr, th, td,
+   article, aside, canvas, details, embed, 
+   figure, figcaption, footer, header, hgroup, 
+   menu, nav, output, ruby, section, summary,
+   time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+  }
+  /* HTML5 display-role reset for older browsers */
+  article, aside, details, figcaption, figure, 
+  footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+  body {
+    line-height: 1;
+  }
+  ol, ul {
+    list-style: none;
+  }
+  blockquote, q {
+    quotes: none;
+  }
+  blockquote:before, blockquote:after,
+  q:before, q:after {
+    content: '';
+    content: none;
+  }
+  table {
+    border-collapse: collapse;
+    border-spacing: 0;
+  }
+  /* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-  display: block;
-}
-body {
-  line-height: 1;
-}
-ol, ul {
-  list-style: none;
-}
-blockquote, q {
-  quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-  content: '';
-  content: none;
-}
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-   </style>
-   
-   
-   
-   
-    <!-- socket.io -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
 
-    <script type="text/javascript">
-    socket = io('http://pickyplay-com.umbler.net',{
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+    height: 26%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+
+
+
+<!-- socket.io -->
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+  socket = io('http://localhost:3000',{
     'reconnection': true,
     'reconnectionDelay': 50000,
     'reconnectionAttempts': 10
-    });
-    var href = location.href;
-    var nomeSala = href.match(/([^\/]*)\/*$/)[1]
- 
-  var socket_id = ""
-   $("#msgId").prop('disabled', true);
-    
-    socket.on("joinRoom", function(data,id) {
-      
-      $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+data.nick+' entrou na sala:</span></p>')
-      $('.chat-area').scrollTop(1000);
-      $('.box-usuarios').append('<div id="'+id+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+data.nick+'</h3><p class="pontos-usuario">'+data.pontos+'</p></div>')
+  });
 
-    })
-    
-    socket.on('image',function(img,opcoes){
-        console.log(opcoes)
-        document.getElementById("img").src = "https://image.tmdb.org/t/p/w700_and_h392_bestv2/"+img+""
-        $('#idResposta1').text(opcoes[0])
-        $('#idResposta2').text(opcoes[1])
-        $('#idResposta3').text(opcoes[2])
-        $('#idResposta4').text(opcoes[3])
-        $('#idResposta5').text(opcoes[4]) 
-        $('#idResposta6').text(opcoes[5])
-        $('#idResposta7').text(opcoes[6])
-        $('#idResposta8').text(opcoes[7])
-        
-        
-    });
-    socket.on("meJoinRoom", function(data,myId) {
-      var arry = JSON.parse(JSON.stringify(data));
-      $("#msgId").prop('disabled', false);
-      console.log(arry)
-      for(var i = 0;arry.length>=i;i++){
-      
+
+  $(".usuarios-container").on('click',function(){
+  console.log("ola");
+
+
+});
+
+  var href = location.href;
+  var nomeSala = href.match(/([^\/]*)\/*$/)[1]
+
+
+
+  var socket_id = ""
+  $("#msgId").prop('disabled', true);
+
+  socket.on("joinRoom", function(data,id) {
+
+    $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+data.nick+' entrou na sala:</span></p>')
+    $('.chat-area').scrollTop(1000);
+    $('.box-usuarios').append('<div id="'+id+'"class="usuarios-container"><div class="usuario-modal"></div><span class="foto-usuario"></span><h3 class="nick-usuario">'+data.nick+'</h3><p class="pontos-usuario">'+data.pontos+'</p></div>')
+
+  })
+
+  socket.on('tempo',function(tempo){
+
+  var x = setInterval(function() {
+  tempo = tempo - 1
+    document.getElementById("demo").innerHTML = tempo + "s ";
+    if (tempo == 0) {
+        tempo = 12
+        document.getElementById("demo").innerHTML = "GO!";
+    }
+  }, 1000);
+
+  });
+  socket.on('image',function(img,opcoes){
+
+    console.log(opcoes)
+    document.getElementById("img").src = "https://image.tmdb.org/t/p/w350_and_h196_bestv2/"+img+""
+    $('#idResposta1').text(opcoes[0])
+    $('#idResposta2').text(opcoes[1])
+    $('#idResposta3').text(opcoes[2])
+    $('#idResposta4').text(opcoes[3])
+    $('#idResposta5').text(opcoes[4]) 
+    $('#idResposta6').text(opcoes[5])
+    $('#idResposta7').text(opcoes[6])
+    $('#idResposta8').text(opcoes[7])
+
+
+  });
+  socket.on("meJoinRoom", function(data,myId) {
+    var arry = JSON.parse(JSON.stringify(data));
+    $("#msgId").prop('disabled', false);
+    console.log(arry)
+    for(var i = 0;arry.length>=i;i++){
+
       if(arry[i]!=undefined && arry[i].socketId==myId){
-        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container" style="background-color:red;"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">'+arry[i].pontos+'</p></div>')
+        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container" onclick = "openModal(this)" style="background-color:red;"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">'+arry[i].pontos+'</p></div>')
         $('.chat-area').append('<p class="escrita-usuario"><span class="nome">você entrou na sala:</span></p>')
         socket_id = arry[i].socketId;
 
       } else if (arry[i]!=undefined){
-        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">'+arry[i].pontos+'</p></div>')
+        $('.box-usuarios').append('<div id="'+arry[i].socketId+'"class="usuarios-container"><div class="usuario-modal"></div><span class="foto-usuario"></span><h3 class="nick-usuario">'+arry[i].nick+'</h3><p class="pontos-usuario">'+arry[i].pontos+'</p></div>')
       }      
-        
-      }
-      
-      
-    })
-
-    socket.on("outRoom", function(data,id) {
-      $("#"+id).remove();
-      console.log($("#"+id).remove());
-    })
-    function proximo(){
-
-      var rates = document.getElementsByName('resposta');
-      var rate_value;
-
-      for(var i = 0; i < rates.length; i++){
-          if(rates[i].checked){
-              rate_value = rates[i].value;
-          }
-      }
-
-      console.log(rate_value);
-      resposta = $('#'+rate_value).text();
-      console.log(resposta)
-      var href = location.href;
-    // socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
-      socket.emit('resposta',resposta,nomeSala);
 
     }
-    socket.on("receiveMsg",function(user,msg){
-     
-      $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+user+':</span> '+msg+'</p>')
-      $(".chat-area").scrollTop(1000);
 
-    });
-    
-    socket.on("pontos",function(players){
-      $('.box-usuarios').html('');
 
-      console.log(players)
-      for(var i = 0;i<players.length;i++){
-      
+  })
+
+  socket.on("outRoom", function(data,id) {
+    $("#"+id).remove();
+    console.log($("#"+id).remove());
+  })
+  function proximo(){
+
+    var rates = document.getElementsByName('resposta');
+    var rate_value;
+
+    for(var i = 0; i < rates.length; i++){
+      if(rates[i].checked){
+        rate_value = rates[i].value;
+      }
+    }
+
+    console.log(rate_value);
+    resposta = $('#'+rate_value).text();
+    console.log(resposta)
+    var href = location.href;
+    // socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
+    socket.emit('resposta',resposta,nomeSala);
+
+  }
+  socket.on("receiveMsg",function(user,msg){
+
+    $('.chat-area').append('<p class="escrita-usuario"><span class="nome">~'+user+':</span> '+msg+'</p>')
+    $(".chat-area").scrollTop(1000);
+
+  });
+
+  socket.on("pontos",function(players){
+    $('.box-usuarios').html('');
+
+    console.log(players)
+    for(var i = 0;i<players.length;i++){
+
       if(players[i].socketId==socket_id){
-        $('.box-usuarios').append('<div id="'+players[i].socketId+'"class="usuarios-container" style="background-color:red;"><span class="foto-usuario"></span><h3 class="nick-usuario">'+players[i].nick+'</h3><p class="pontos-usuario">'+players[i].pontos+'</p></div>')
+        $('.box-usuarios').append('<div id="'+players[i].socketId+'"class="usuarios-container" onclick ="openModal(this)" style="background-color:red;"><span class="foto-usuario"><div class="usuario-modal"></div></span><h3 class="nick-usuario">'+players[i].nick+'</h3><p class="pontos-usuario">'+players[i].pontos+'</p></div>')
         //socket_id = arry[i].socketId;
 
       } else{
         $('.box-usuarios').append('<div id="'+players[i].socketId+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+players[i].nick+'</h3><p class="pontos-usuario">'+players[i].pontos+'</p></div>')
       }
-      }      
+    }      
 
-    });
+  });
 
 
-    socket.on("meReceiveMsg",function(user,msg){
-     
-     $('.chat-area').append('<p class="escrita-usuario"><span style="color:red;"class="nome">~'+user+':</span> '+msg+'</p>')
-     $(".chat-area").scrollTop(1000);
+  socket.on("meReceiveMsg",function(user,msg){
 
-    });
-    
-     $('.mensagem-usuario').keydown(function (e) {
-     if (e.which === 13) {
-       sendMsg($('.mensagem-usuario').val());
-       $('.mensagem-usuario').val('');
-     }
+   $('.chat-area').append('<p class="escrita-usuario"><span style="color:red;"class="nome">~'+user+':</span> '+msg+'</p>')
+   $(".chat-area").scrollTop(1000);
+
  });
 
-    function sendMsg(msg){
-      var href = location.href;
-      socket.emit('sendMsg',socket_id,msg,href.match(/([^\/]*)\/*$/)[1]);
-      
-    }
-    var href = location.href;
-      socket.emit("joinRoom",href.match(/([^\/]*)\/*$/)[1])
-    $(function(){
-       socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
+  $('.mensagem-usuario').keydown(function (e) {
+   if (e.which === 13) {
+     sendMsg($('.mensagem-usuario').val());
+     $('.mensagem-usuario').val('');
+   }
+ });
 
-    });
-    
-    </script>
-  </body>
+  function sendMsg(msg){
+    var href = location.href;
+    socket.emit('sendMsg',socket_id,msg,href.match(/([^\/]*)\/*$/)[1]);
+
+  }
+
+  function openModal(elemt){
+
+    nick = $('#'+elemt.id).children('.nick-usuario').text();
+    idUser = elemt.id
+    modal.style.display = "block";
+    $('#nickModal').val(nick);
+
+
+
+  }
+
+  var modal = document.getElementById('myModal');
+
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+  var href = location.href;
+  socket.emit("joinRoom",href.match(/([^\/]*)\/*$/)[1])
+
+
+  $('#nickModal').keypress(function(e){
+
+    if(e.which==13){
+
+     trocarNick(socket_id,$('#nickModal').val());
+     modal.style.display = "none";
+    }
+
+  })
+
+  function trocarNick(socketId,newNick){
+
+    socket.emit('trocarNick',socketId);
+
+  }
+
+
+  $(function(){
+   socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
+
+
+ });
+
+</script>
+</body>
 </html>
