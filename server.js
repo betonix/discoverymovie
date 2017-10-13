@@ -107,9 +107,6 @@ room = ""
 
       setInterval(function(){
       tempo = tempo - 1  
-      if (tempo<=0){
-        tempo=0;
-      }
       io.sockets.to(room).emit("tempo",tempo);
 
       },1001);
