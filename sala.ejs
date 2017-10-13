@@ -402,28 +402,30 @@
     $('.box-usuarios').append('<div id="'+id+'"class="usuarios-container"><div class="usuario-modal"></div><span class="foto-usuario"></span><h3 class="nick-usuario">'+data.nick+'</h3><p class="pontos-usuario">'+data.pontos+'</p></div>')
 
   })
-
+  var flag = false
   socket.on('tempo',function(tempo){
 
- 
-
-    document.getElementById("demo").innerHTML = tempo + "s ";
+    if(flag){
+    
     if (tempo == 0) {
+        flag = false;
          document.getElementById("img").src = ""
-        $('#idResposta1').text()
-        $('#idResposta2').text()
-        $('#idResposta3').text()
-        $('#idResposta4').text()
-        $('#idResposta5').text() 
-        $('#idResposta6').text()
-        $('#idResposta7').text()
-        $('#idResposta8').text()
+        $('#idResposta1').text("")
+        $('#idResposta2').text("")
+        $('#idResposta3').text("")
+        $('#idResposta4').text("")
+        $('#idResposta5').text("") 
+        $('#idResposta6').text("")
+        $('#idResposta7').text("")
+        $('#idResposta8').text("")
         document.getElementById("demo").innerHTML = "GO!";
+    }else{
+      document.getElementById("demo").innerHTML = tempo + "s ";
     }
- 
+  }
   });
   socket.on('image',function(img,opcoes){
-
+    flag =  true;
     console.log(opcoes)
     document.getElementById("img").src = "https://image.tmdb.org/t/p/w350_and_h196_bestv2/"+img+""
     $('#idResposta1').text(opcoes[0])
