@@ -280,7 +280,12 @@ var req = http.request(options, function (res) {
   res.on("end", function () {
    var body = Buffer.concat(chunks);
    var  data = JSON.parse(body.toString());
-   var filme = data.results[randomMovie()]
+   if(data.results!=undefined){
+      var filme = data.results[randomMovie()]
+   }else{
+      nextMovie(socket,room);
+   }
+   
    similires.push(filme);
  //getImageMovie(filme.backdrop_path,filme.id,socket);
    allRooms[socket['sala']].title = filme.title;
