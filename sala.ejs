@@ -374,7 +374,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-  socket = io('http://localhost:3000',{
+  socket = io('pickyplay-com.umbler.net',{
     'reconnection': true,
     'reconnectionDelay': 50000,
     'reconnectionAttempts': 10
@@ -405,15 +405,14 @@
 
   socket.on('tempo',function(tempo){
 
-  var x = setInterval(function() {
-  tempo = tempo - 1
+ 
+
     document.getElementById("demo").innerHTML = tempo + "s ";
     if (tempo == 0) {
-        tempo = 12
+
         document.getElementById("demo").innerHTML = "GO!";
     }
-  }, 1000);
-
+ 
   });
   socket.on('image',function(img,opcoes){
 
@@ -470,7 +469,8 @@
     console.log(resposta)
     var href = location.href;
     // socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
-    socket.emit('resposta',resposta,nomeSala);
+    nick = $('#'+socket_id).children('.nick-usuario').text();
+    socket.emit('resposta',resposta,nomeSala,nick);
 
   }
   socket.on("receiveMsg",function(user,msg){
@@ -494,6 +494,22 @@
         $('.box-usuarios').append('<div id="'+players[i].socketId+'"class="usuarios-container"><span class="foto-usuario"></span><h3 class="nick-usuario">'+players[i].nick+'</h3><p class="pontos-usuario">'+players[i].pontos+'</p></div>')
       }
     }      
+
+  });
+
+  socket.on('acertou',function(nick,acertou){
+
+    if(acertou){
+
+     $('.chat-area').append('<p class="escrita-usuario"><span class="nome">'+nick+' ACERTOU</span></p>')
+        socket_id = arry[i].socketId;
+
+    }else{
+
+      $('.chat-area').append('<p class="escrita-usuario"><span class="nome">'+nick+' ERROU.</span></p>')
+        socket_id = arry[i].socketId;
+    }
+    $(".chat-area").scrollTop(1000);
 
   });
 
@@ -562,14 +578,19 @@ window.onclick = function(event) {
 
   function trocarNick(socketId,newNick){
 
-    socket.emit('trocarNick',socketId);
+    socket.emit('trocarNick',socketId,newNick,nomeSala);
 
   }
 
 
-  $(function(){
-   socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
+  socket.on('trocaNick',function(socketId,newNick){
+    console.log(newNick);
+    $('#'+socketId).children('.nick-usuario').text(newNick);
 
+  });
+
+  $(function(){
+   //socket.emit('nextMovie',href.match(/([^\/]*)\/*$/)[1]);
 
  });
 

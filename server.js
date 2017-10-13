@@ -88,6 +88,7 @@ room = ""
 
  socket.on('joinRoom',function(room){
     
+    var tempo = 13;
 
     if (allRooms[room]==undefined){
       allRooms[room] = []
@@ -98,7 +99,20 @@ room = ""
       }    
       allRooms[room].push(obj)
       
-     
+      setInterval(function(){
+
+      nextMovie(socket,room);
+      tempo = 13;
+      },12000);
+
+      setInterval(function(){
+      tempo = tempo - 1  
+      if (tempo<=0){
+        tempo=0;
+      }
+      io.sockets.to(room).emit("tempo",tempo);
+
+      },1001);
 
     }else{
   
@@ -112,13 +126,8 @@ room = ""
       allRooms[room].push(obj)
     }
     
-
-      setInterval(function(){
-
       nextMovie(socket,room);
-      io.sockets.to(room).emit("tempo",10);
 
-      },10000);
 
 
     socket.join(room);
@@ -135,8 +144,11 @@ room = ""
 
  });
 
- socket.on('trocarNick',function(socketId,newNick){
+ socket.on('trocarNick',function(socketId,newNick,room){
 
+        trocarNick(socketId,newNick,room);
+        console.log('troquei')
+        io.sockets.in(room).emit('trocaNick',socketId,newNick);
 
  });
 
@@ -157,11 +169,11 @@ room = ""
      //nextMovie(socket,room);
  })
 
- socket.on('resposta',function(resposta,nomeSala){
-
+ socket.on('resposta',function(resposta,nomeSala,nick){
+  var acertou = false; 
   if (verificaResposta(nomeSala,resposta)){
     somaPonto(nomeSala,socket.id)
-
+    acertou = true;
   }else{
     retiraPontos(nomeSala,socket.id)
 
@@ -171,7 +183,10 @@ room = ""
   for(var i = 0; i<allRooms[nomeSala].length;i++){
     players.push({nick:allRooms[nomeSala][i].nick,pontos:allRooms[nomeSala][i].pontos,socketId:allRooms[nomeSala][i].socketId})
   }
+
   io.sockets.in(nomeSala).emit('pontos',players)
+
+  io.sockets.in(nomeSala).emit('acertou',nick,acertou)
 
  }) 
 
@@ -436,7 +451,19 @@ for (var i = 0; i<allRooms[sala].length;i++) {
  }
 
 }
+function trocarNick(socketId,newNick,room){
 
+ for(var i = 0;i<allRooms[room].length;i++){
+
+  if (allRooms[sala][i].socketId == socketId){
+      oldNick = allRooms[sala][i].nick
+      allRooms[sala][i].nick = newNick
+      return [oldNick,newNick];
+  }
+
+ }
+
+}
 
 
 server.listen(3000);
