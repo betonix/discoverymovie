@@ -102,14 +102,14 @@ room = ""
       setInterval(function(){
 
       nextMovie(socket,room);
-      tempo = 13;
+      tempo = 12;
       },12000);
 
       setInterval(function(){
       tempo = tempo - 1  
       io.sockets.to(room).emit("tempo",tempo);
 
-      },1001);
+      },1000);
 
     }else{
   
